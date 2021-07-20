@@ -36,80 +36,89 @@ class AppDrawer extends StatelessWidget {
             fraction: 0.65,
           ), //widthOfScreen(context),
       child: Drawer(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(Sizes.PADDING_16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: onClose ??
-                        () {
-                          Navigator.pop(context);
-                        },
-                    child: CircularContainer(
-                      color: AppColors.accentColor2,
-                      width: Sizes.WIDTH_30,
-                      height: Sizes.HEIGHT_30,
+        child: SafeArea(
+          bottom: false,
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(Sizes.PADDING_16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: onClose ??
+                          () {
+                            Navigator.pop(context);
+                          },
                       child: Icon(
-                        Icons.close,
-                        size: Sizes.ICON_SIZE_20,
-                        color: AppColors.secondaryColor,
-                      ),
+                          Icons.close_sharp,
+                          size: Sizes.ICON_SIZE_24,
+                          color: AppColors.accentColor,
+                        ),
+ 
+                      // child: CircularContainer(
+                      //   color: AppColors.accentColor2,
+                      //   width: Sizes.WIDTH_30,
+                      //   height: Sizes.HEIGHT_30,
+                      //   child: Icon(
+                      //     Icons.close_sharp,
+                      //     size: Sizes.ICON_SIZE_20,
+                      //     color: AppColors.secondaryColor,
+                      //   ),
+                      // ),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(flex: 1),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ..._buildMenuList(menuList: menuList, context: context),
+                ],
+              ),
+              Spacer(flex: 1),
+              Socials(
+                isHorizontal: true,
+                color: AppColors.accentColor2,
+                alignment: Alignment.center,
+                barColor: AppColors.accentColor2,
+                crossAxisAlignment: CrossAxisAlignment.center,
+              ),
+              SpaceH16(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    StringConst.DESIGNED_IN,
+                    style: theme.textTheme.bodyText1.copyWith(
+                      color: AppColors.accentColor2,
+                      fontSize: Sizes.TEXT_SIZE_10,
+                    ),
+                  ),
+                  SpaceW4(),
+                  Icon(
+                    FontAwesomeIcons.solidHeart,
+                    color: Colors.red,
+                    size: Sizes.ICON_SIZE_10,
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    StringConst.BUILT_BY + ", " + StringConst.DESIGNED_BY,
+                    style: theme.textTheme.bodyText1.copyWith(
+                      color: AppColors.accentColor2,
+                      fontSize: Sizes.TEXT_SIZE_10,
                     ),
                   ),
                 ],
               ),
-            ),
-            Spacer(flex: 1),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ..._buildMenuList(menuList: menuList, context: context),
-              ],
-            ),
-            Spacer(flex: 1),
-            Socials(
-              isHorizontal: true,
-              color: AppColors.accentColor2,
-              alignment: Alignment.center,
-              barColor: AppColors.accentColor2,
-              crossAxisAlignment: CrossAxisAlignment.center,
-            ),
-            SpaceH16(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  StringConst.DESIGNED_IN,
-                  style: theme.textTheme.bodyText1.copyWith(
-                    color: AppColors.accentColor2,
-                    fontSize: Sizes.TEXT_SIZE_10,
-                  ),
-                ),
-                SpaceW4(),
-                Icon(
-                  FontAwesomeIcons.solidHeart,
-                  color: Colors.red,
-                  size: Sizes.ICON_SIZE_10,
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  StringConst.BUILT_BY + ", " + StringConst.DESIGNED_BY,
-                  style: theme.textTheme.bodyText1.copyWith(
-                    color: AppColors.accentColor2,
-                    fontSize: Sizes.TEXT_SIZE_10,
-                  ),
-                ),
-              ],
-            ),
-            SpaceH16(),
-          ],
+              SpaceH16(),
+            ],
+          ),
         ),
       ),
     );
@@ -134,8 +143,7 @@ class AppDrawer extends StatelessWidget {
           },
           title: menuList[i].title,
           isMobile: true,
-          selected:
-              selectedItemRouteName == menuList[i].routeName ? true : false,
+          selected: selectedItemRouteName == menuList[i].routeName ? true : false,
         ),
       );
       menuItems.add(SpaceH16());
